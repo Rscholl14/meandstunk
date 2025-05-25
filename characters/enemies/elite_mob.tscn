@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource path="res://scripts/elite_mob.gd" type="Script" id=1]
+[ext_resource path="res://models/elite_mob_mesh.glb" type="PackedScene" id=2]
+[ext_resource path="res://animations/elite_mob_animation.tres" type="AnimationPlayer" id=3]
+
+[node name="EliteMob" type="CharacterBody3D"]
+script = ExtResource(1)
+collision_layer = 2
+collision_mask = 1
+velocity = Vector3.ZERO
+
+# Additional elite mob properties
+@export var elite_skill_proc_bonus := 2.5
+@export var elite_health_multiplier := 1.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource(2)
+cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = CapsuleShape3D {
+	radius = 0.6
+	height = 1.8
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+animation = ExtResource(3)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -2.5)
+enabled = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+radius = 0.6
+height = 1.8
+max_speed = 6.0
+acceleration = 12.0
+max_acceleration = 18.0
+target_desired_distance = 0.1
+
+# Optional visual effect node to highlight elite status
+[node name="GlowEffect" type="Light3D" parent="."]
+light_energy = 1.5
+light_color = Color(1, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

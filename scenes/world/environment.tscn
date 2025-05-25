@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3]
+
+[node name="Environment" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = PlaneMesh.new()
+mesh.size = Vector2(100, 100)
+transform = Transform3D(Basis(), Vector3(0, 0, 0))
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(
+    Basis().rotated(Vector3(1, 0, 0), deg2rad(-45)).rotated(Vector3(0, 1, 0), deg2rad(30)),
+    Vector3(0, 10, 0)
+)
+light_energy = 1.0
+light_color = Color(1, 1, 0.9)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = Environment.new()
+environment.background_mode = Environment.BG_SKY
+environment.sky = PanoramaSky.new()
+environment.sky.panorama = null # Use default procedural sky
+
+[node name="SpawnPoint" type="Position3D" parent="."]
+transform = Transform3D(Basis(), Vector3(0, 1, 0))

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3]
+
+[node name="TestZone" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = BoxShape3D.new()
+shape.extents = Vector3(50, 0.5, 50)
+
+[node name="PlayerSpawn" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Enemy" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+mass = 1.0
+friction = 1.0
+
+[node name="EnemyCollisionShape" type="CollisionShape3D" parent="Enemy"]
+shape = CapsuleShape3D.new()
+shape.radius = 0.5
+shape.height = 1.5
+
+[node name="Ladder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="LadderCollisionShape" type="CollisionShape3D" parent="Ladder"]
+shape = BoxShape3D.new()
+shape.extents = Vector3(0.3, 2.5, 0.3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707, -0.707, 0, 0.707, 0.707, 0, 0, 0, 1, 0, 10, 0)
+light_energy = 2.0
+light_color = Color(1, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 10, 15)
+current = true

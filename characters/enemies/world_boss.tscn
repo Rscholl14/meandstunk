@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource path="res://scripts/world_boss.gd" type="Script" id=1]
+[ext_resource path="res://models/world_boss_mesh.glb" type="PackedScene" id=2]
+[ext_resource path="res://animations/world_boss_animation.tres" type="AnimationPlayer" id=3]
+[ext_resource path="res://sounds/boss_roar.wav" type="AudioStream" id=4]
+
+[node name="WorldBoss" type="CharacterBody3D"]
+script = ExtResource(1)
+collision_layer = 4
+collision_mask = 1
+velocity = Vector3.ZERO
+
+@export var boss_skill_proc_bonus := 5.0
+@export var boss_health_multiplier := 5.0
+@export var boss_damage_multiplier := 3.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource(2)
+scale = Vector3(3, 3, 3) # Larger scale for boss
+cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = CapsuleShape3D {
+	radius = 1.5
+	height = 4.5
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+animation = ExtResource(3)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -4)
+enabled = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+radius = 1.5
+height = 4.5
+max_speed = 4.0
+acceleration = 10.0
+max_acceleration = 15.0
+target_desired_distance = 0.5
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource(4)
+autoplay = true
+volume_db = -6
+
+[node name="BossGlow" type="OmniLight3D" parent="."]
+light_energy = 4.0
+light_color = Color(1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_top = 0.05
+anchor_bottom = 0.10
+value = 100
+min_value = 0
+max_value = 100

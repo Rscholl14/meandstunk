@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+anchor_left = 0.05
+anchor_top = 0.9
+anchor_right = 0.35
+anchor_bottom = 0.95
+margin_left = 0
+margin_top = 0
+margin_right = 0
+margin_bottom = 0
+value = 100
+max_value = 100
+under = false
+stretch_mode = 2 # STRETCH_SCALE
+texture_progress = preload("res://assets/ui/health_bar_fill.png")
+texture_under = preload("res://assets/ui/health_bar_bg.png")
+
+[node name="StaminaBar" type="TextureProgress" parent="."]
+anchor_left = 0.05
+anchor_top = 0.82
+anchor_right = 0.35
+anchor_bottom = 0.87
+margin_left = 0
+margin_top = 0
+margin_right = 0
+margin_bottom = 0
+value = 100
+max_value = 100
+stretch_mode = 2 # STRETCH_SCALE
+texture_progress = preload("res://assets/ui/stamina_bar_fill.png")
+texture_under = preload("res://assets/ui/stamina_bar_bg.png")
+
+[node name="AmmoLabel" type="Label" parent="."]
+anchor_left = 0.85
+anchor_top = 0.9
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = 0
+margin_top = 0
+margin_right = 0
+margin_bottom = 0
+text = "Ammo: 30"
+theme = null
+align = 2 # ALIGN_RIGHT
+valign = 1 # VALIGN_CENTER

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3]
+
+[node name="FarmPlot" type="Node3D"]
+
+[node name="PlotMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource( 1 ) # You would replace with actual mesh resource
+
+[node name="Crop" type="MeshInstance3D" parent="."]
+transform/translation = Vector3(0, 0.1, 0)
+visible = false
+mesh = ExtResource( 2 ) # Placeholder for crop mesh
+
+[node name="Area" type="Area3D" parent="."]
+transform/translation = Vector3(0, 0, 0)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+shape = CapsuleShape3D {
+    radius = 0.5
+    height = 0.1
+}

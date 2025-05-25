@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource path="res://meshes/seedling_mesh.glb" type="Mesh" id=1]
+[ext_resource path="res://meshes/young_crop_mesh.glb" type="Mesh" id=2]
+[ext_resource path="res://meshes/mature_crop_mesh.glb" type="Mesh" id=3]
+
+[node name="Crop" type="Node3D"]
+
+[node name="Stage1" type="MeshInstance3D" parent="."]
+mesh = ExtResource(1)
+visible = true
+
+[node name="Stage2" type="MeshInstance3D" parent="."]
+mesh = ExtResource(2)
+visible = false
+
+[node name="Stage3" type="MeshInstance3D" parent="."]
+mesh = ExtResource(3)
+visible = false
+
+[node name="Area" type="Area3D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+shape = CapsuleShape3D {
+	radius = 0.3
+	height = 0.5
+}
+
+[node name="Rarity" type="String" parent="."] # This is just a placeholder node for rarity; handle rarity in script
+text = "normal"  # Possible values: "poor", "normal", "pristine"
